@@ -46,9 +46,9 @@ const Home = () => {
             <div className='flex flex-col space-y-10 w-[100%] items-center'>
             <h1 className='text-green-600 text-2xl font-bold'>WELCOME!</h1>
 
-            <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-6 cursor-pointer' onClick={openCamera}>
+            <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-6 cursor-pointer'>
               { !isCameraOpen ? (
-                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'>
+                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'  onClick={openCamera}>
 
 
                 <BsCamera className='text-6xl' />
@@ -84,7 +84,7 @@ const Home = () => {
 
                 <p className='py-2'>Upload Photo</p>
 
-                <input className='text-black' type='file' accept="image/*" capture='environment' id='cameraInput' onChange={handleImageCapture} />
+                <input className='text-black' type='file' accept="image/*" capture='environment' id='cameraInput' />
                 {image && (
                   <div>
                     <img src={image} alt="captured" style={{width: '300px', height: 'auto'}}/>

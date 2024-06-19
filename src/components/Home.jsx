@@ -84,7 +84,7 @@ const Home = () => {
 
                 <p className='py-2'>Upload Photo</p>
 
-                <input className='text-black' type='file' accept="image/*" capture='environment' id='cameraInput' />
+                <input className='text-black' type='file' accept="image/*" id='cameraInput' />
                 {image && (
                   <div>
                     <img src={image} alt="captured" style={{width: '300px', height: 'auto'}}/>

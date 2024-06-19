@@ -42,16 +42,16 @@ const Home = () => {
     
 
     return(
-        <div className=' mx-auto py-10 md:py-20'>
-            <div className='flex flex-col space-y-10 w-[100%] items-center'>
+        <div className=' mx-auto py-10 md:py-20 px-6 md:px-0'>
+            <div className='flex flex-col  space-y-10 w-[100%] items-center'>
             <h1 className='text-green-600 text-2xl font-bold'>WELCOME!</h1>
 
             <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-6 cursor-pointer'>
               { !isCameraOpen ? (
-                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'  onClick={openCamera}>
+                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'>
 
 
-                <BsCamera className='text-6xl' />
+                <BsCamera className='text-6xl'  onClick={openCamera}/>
 
                 <p className='py-2'>Take Photo</p>
 
@@ -77,14 +77,14 @@ const Home = () => {
                 }
 
                 
-                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'>
+                <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center md:w-2/4'>
 
 
                 <BsCapslock className='text-6xl' />
 
                 <p className='py-2'>Upload Photo</p>
 
-                <input className='text-black' type='file' accept="image/*" id='cameraInput' />
+                <input className='bg-white text-green-600' type='file' accept="image/*" id='cameraInput'  />
                 {image && (
                   <div>
                     <img src={image} alt="captured" style={{width: '300px', height: 'auto'}}/>

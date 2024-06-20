@@ -1,41 +1,26 @@
 import { BsCamera } from "react-icons/bs";
 import { BsCapslock } from "react-icons/bs";
-import { useState, useRef } from 'react';
+import { useState} from 'react';
+import {Camera} from "react-camera-pro";
 
 const Home = () => {
 
     const [image, setImage] = useState(null);
+    const [camera, setCamera] = useState(null);
     const [isCameraOpen, setIsCameraOpen] = useState(false);
-    const [imageSrc, setImageSrc] = useState(null);
-    const videoRef = useRef(null);
-    const canvasRef = useRef(null);
 
-    const handleImageCapture = (e) =>{
-      const file = e.target.files[0];
-      if(file) {
-        const imageUrl = URL.createObjectUrl(file);
-        setImage(imageUrl);
-      }
-    };
+    const openCamera = () => {
 
-    const openCamera = async () => {
-
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({video: true});
-        videoRef.current.srcObject = stream;
-        setIsCameraOpen(true);
-      }
-      catch (err) {
-        console.error('Error accessing media devices.', err);
-      }
-    };
+      setIsCameraOpen(true);
+    }
 
     const takePicture = () =>{
-      const context = canvasRef.current.getContext('2d');
-      context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-      setImageSrc(canvasRef.current.toDataURL('image/png'));
-
+      const photo = camera.takePhoto();
+      setImage(photo);
+      setIsCameraOpen(false);
     }
+
+
 
     
 
@@ -47,34 +32,35 @@ const Home = () => {
             <h1 className='text-green-600 text-2xl font-bold'>WELCOME!</h1>
 
             <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-6 cursor-pointer'>
-              { !isCameraOpen ? (
+            
                 <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center'>
 
-
-                <BsCamera className='text-6xl'  onClick={openCamera}/>
-
-                <p className='py-2'>Take Photo</p>
-
-                
-
-                </div>) : (
-
-                   <>
-                <video ref={videoRef} autoPlay style={{ width: '300px', height: 'auto' }}></video>
-                <button onClick={takePicture}>Capture Image</button>
-                <canvas ref={canvasRef} style={{}} width="300" height="200"></canvas>
-                  {imageSrc && (
-                    <div>
-                       <h2>Captured Image:</h2>
-                        <img src={imageSrc} alt="Captured" style={{ width: '300px', height: 'auto' }} />
-                   </div>
+                {!isCameraOpen ? (<BsCamera className='text-6xl' onClick={openCamera}/>
+                ) : (
+                  <>
+                  <Camera ref={setCamera} facingMode='user' />
+                  <button onClick={takePicture}>Capture Image</button>
+                  </>
                 )}
-        </>
 
+               {   
 
+                image && (
+                  <div>
+                    <h2>Captured Image</h2>
+                    <img src={image} alt="Captured" style={{ width: '300px', height: 'auto' }} />
+                  </div>
                 )
 
                 }
+
+                <p>Take Photo</p>
+
+                
+
+                </div>
+
+                
 
                 
                 <div className='border border-green-600 text-green-600  p-10 rounded-2xl items-center md:w-2/4'>

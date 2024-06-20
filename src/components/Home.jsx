@@ -1,12 +1,12 @@
 import { BsCamera } from "react-icons/bs";
 import { BsCapslock } from "react-icons/bs";
-import { useState} from 'react';
+import { useState, useRef} from 'react';
 import {Camera} from "react-camera-pro";
 
 const Home = () => {
 
     const [image, setImage] = useState(null);
-    const [camera, setCamera] = useState(null);
+    const camera = useRef(null);
     const [isCameraOpen, setIsCameraOpen] = useState(false);
 
     const openCamera = () => {
@@ -38,7 +38,7 @@ const Home = () => {
                 {!isCameraOpen ? (<BsCamera className='text-6xl' onClick={openCamera}/>
                 ) : (
                   <>
-                  <Camera ref={setCamera} facingMode='user' />
+                  <Camera ref={camera} facingMode='user' />
                   <button onClick={takePicture}>Capture Image</button>
                   </>
                 )}

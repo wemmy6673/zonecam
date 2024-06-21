@@ -2,8 +2,9 @@ import { BsCamera } from "react-icons/bs";
 import { BsCapslock } from "react-icons/bs";
 import { useState, useRef} from 'react';
 import {Camera} from "react-camera-pro";
+import Header from "./Header";
 
-const Home = () => {
+const Predict = () => {
 
     const [image, setImage] = useState(null);
     const camera = useRef(null);
@@ -27,9 +28,13 @@ const Home = () => {
     
 
     return(
-        <div className=' mx-auto py-10 md:py-20 px-6 md:px-0'>
+
+      
+  
+        <div className=' mx-auto py-5 md:py-0 px-6 md:px-0'>
+          <Header />
             <div className='flex flex-col  space-y-10 w-[100%] items-center'>
-            <h1 className='text-green-600 text-2xl font-bold'>WELCOME!</h1>
+              
 
             <div className='flex flex-col space-y-8 md:space-y-0 md:flex-row md:space-x-6 cursor-pointer'>
             
@@ -38,7 +43,7 @@ const Home = () => {
                 {!isCameraOpen ? (<BsCamera className='text-6xl' onClick={openCamera}/>
                 ) : (
                   <>
-                  <Camera ref={camera} facingMode='user' />
+                  <Camera ref={camera} facingMode='user' aspectRatio={4 / 3} />
                   <button onClick={takePicture}>Capture Image</button>
                   </>
                 )}
@@ -89,4 +94,4 @@ const Home = () => {
 
 }
 
-export default Home;
+export default Predict;

@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css'
+import Splash from './components/Splash';
+import Predict from './components/Predict';
 import LandingPage from './components/LandingPage';
-import Home from './components/Home';
 
 function App() {
 
@@ -10,8 +11,10 @@ function App() {
     <BrowserRouter>
 
           <Routes>
-              <Route path='/' element={<LandingPage/>}  />
-              <Route path='/Home' element={<Home />} />
+              <Route path='/' element={<Splash/>}  />
+              <Route path='/LandingPage' element={<LandingPage/>} />
+              <Route path='/Predict' element={<Predict />} />
+
           </Routes>
 
     

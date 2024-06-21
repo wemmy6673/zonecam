@@ -12,9 +12,9 @@ const LandingPage = () => {
 
 
             <div className='flex flex-col-reverse pb-10 md:flex-row px-4 md:px-20 md:space-x-20'>
-                <div className='w-3/4 md:w-2/4'>
+                <div className='w-full md:w-2/4'>
 
-                    <img src={Nigerians} alt="Nigerians" />
+                    <img src={Nigerians} alt="Nigerians" className='rounded-lg' />
 
                 </div>
 

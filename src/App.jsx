@@ -13,7 +13,7 @@ function App() {
           <Routes>
               <Route path='/' element={<Splash/>}  />
               <Route path='/LandingPage' element={<LandingPage/>} />
-              <Route path='/Predict' element={<Predict />} />
+              <Route path='LandingPage/Predict' element={<Predict />} />
 
           </Routes>
 

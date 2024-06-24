@@ -6,6 +6,7 @@ import {Camera} from "react-camera-pro";
 import Header from "./Header";
 
 const Predict = () => {
+  
 
     const [image, setImage] = useState(null);
     const camera = useRef(null);

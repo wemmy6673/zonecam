@@ -1,13 +1,34 @@
 import Header from './Header';
 import Nigerians from '../images/nigerians.png';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Loader from './Loader';
+import { useState, useEffect } from 'react';
+
+
 
 const LandingPage = () => {
 
+    const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        setLoading(true)
+        setTimeout(()=>{
+            setLoading(false)
+        }, 3000)
+    }, [])
+
+    
+
     return(
 
-        <div className=''>
+        
 
+    <div className=''>
+        {
+            loading  ? 
+                
+            <Loader/>  :
+         <div> 
             <Header />
 
 
@@ -32,8 +53,13 @@ const LandingPage = () => {
 
         </div>
 
+
+        }
+        </div>
     )
 }
+
+
 
 export default LandingPage;
 

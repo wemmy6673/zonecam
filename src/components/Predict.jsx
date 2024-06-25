@@ -28,7 +28,15 @@ const Predict = () => {
 
     }, [])
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop, accept: 'image/*'})
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop, accept: {
+      'image/png': [".png"],
+      'image/jpg': [".jpeg", ".jpg"],
+      'image/jpeg': [".jpg", "jpeg"],
+      'image/svg': [".svg"],
+      'image/webp': [".webp"],
+
+    }
+    })
 
     const openCamera = () => {
 

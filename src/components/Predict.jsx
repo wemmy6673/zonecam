@@ -1,12 +1,23 @@
 import { BsCamera } from "react-icons/bs";
 import { BsCapslock } from "react-icons/bs";
-import { useState, useRef, useCallback} from 'react';
+import { useState, useEffect, useRef, useCallback} from 'react';
+import Loader from './Loader';
 import {useDropzone} from 'react-dropzone';
 import {Camera} from "react-camera-pro";
 import Header from "./Header";
 
 const Predict = () => {
-  
+
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+      setLoading(true)
+      setTimeout(()=>{
+          setLoading(false)
+      }, 2000)
+    }, [])
+
 
     const [image, setImage] = useState(null);
     const camera = useRef(null);
@@ -38,7 +49,11 @@ const Predict = () => {
 
     return(
 
-      
+      <div className=''>
+        {
+            loading  ? 
+                
+            <Loader/>  :
   
         <div className=' mx-auto py-5 md:py-0 px-6 md:px-0 items-center'>
           <Header />
@@ -96,6 +111,9 @@ const Predict = () => {
 
             </div>
             </div>
+        </div>
+
+        }
         </div>
     )
 

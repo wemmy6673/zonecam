@@ -1,6 +1,8 @@
 import { ColorRing } from 'react-loader-spinner';
 
 const Loader = () => (
+  <div className='flex items-center justify-center h-screen'>
+
   <ColorRing
     visible={true}
     height={80}
@@ -8,8 +10,11 @@ const Loader = () => (
     ariaLabel="color-ring-loading"
     wrapperStyle={{}}
     wrapperClass="color-ring-wrapper"
-    colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+    colors={['#16A34A','#16A34A','#16A34A','#16A34A','#16A34A']}
+    className=''
   />
+
+  </div>
 );
 
 export default Loader;

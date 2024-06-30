@@ -8,6 +8,7 @@ import Loader from './Loader';
 import {useDropzone} from 'react-dropzone';
 import { createObjectURL, imgSrcToBlob} from "blob-util";
 import Header from "./Header";
+import Preview from './Preview';
 
 const sources = [
   {
@@ -94,6 +95,13 @@ const Predict = ({ submitImages }) => {
     return () => {
       setImageFiles([]);
       setSelectedSource(source);
+    };
+  }
+
+  function removeImage(index) {
+    return () => {
+      const newImages = imageFiles.filter((_, i) => i !== index);
+      setImageFiles(newImages);
     };
   }
 
@@ -212,6 +220,10 @@ const Predict = ({ submitImages }) => {
                   <button className="btn-2 text-green-600">Browse</button>
                 </div>
 
+                {/* Images Preview  */}
+
+                <Preview imageFiles={imageFiles} removeImage={removeImage} />
+
               
               </div>
             )}
@@ -241,6 +253,10 @@ const Predict = ({ submitImages }) => {
                     className="w-12 h-12 rounded-full block outline-none  bg-green-600"
                   ></button>
                 </div>
+
+                 {/* Images Preview  */}
+
+                 <Preview imageFiles={imageFiles} removeImage={removeImage} />
 
                 
               </div>

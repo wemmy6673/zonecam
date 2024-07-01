@@ -2,6 +2,7 @@ import { BsCamera } from "react-icons/bs";
 import { BsCapslock } from "react-icons/bs";
 import { useState, useEffect, useRef, useCallback} from 'react';
 import Camera from '../images/camera.png';
+import Upload from '../images/upload.png';
 import Webcam from 'react-webcam';
 import { toast } from "react-toastify";
 import Loader from './Loader';
@@ -14,7 +15,7 @@ const sources = [
   {
     name: "Upload",
     description: "Upload a photo.",
-    image: Camera
+    image: Upload
   },
   {
     name: "Camera",
@@ -180,7 +181,7 @@ const Predict = ({ submitImages }) => {
             {imageFiles && imageFiles.length > 0 ? (
               <button
                 onClick={handleSubmit}
-                className="btn-2 py-2 text-base self-center"
+                className="py-2 text-white bg-green-600 self-center"
               >
                 Detect
               </button>
@@ -199,7 +200,7 @@ const Predict = ({ submitImages }) => {
               <div className="w-full space-y-8">
                 <div
                   {...getRootProps()}
-                  className="flex flex-col justify-center items-center w-full min-h-[300px] border-2 rounded-xl border-dashed border-white/80 space-y-4"
+                  className="flex flex-col justify-center items-center w-5/6 mx-auto min-h-[300px] border-2 rounded-xl border-dashed border-green-600 space-y-4"
                 >
                   <input {...getInputProps()} />
                  <BsCapslock className='text-green-600 text-2xl'/>
@@ -241,7 +242,7 @@ const Predict = ({ submitImages }) => {
                     screenshotQuality={1}
                     className="w-full h-full object-cover rounded-2xl"
                     videoConstraints={{
-                      facingMode: "environment",
+                      facingMode: "user",
                       //   facingMode: { exact: "environment" },
                     }}
                   />

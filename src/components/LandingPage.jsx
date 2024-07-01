@@ -48,7 +48,7 @@ const LandingPage = () => {
 
                 <div className='flex flex-col space-y-4 md:w-1/3 md:mx-auto'>
                     <h1 className='text-green-600 text-md font-bold'>Terms of service</h1>
-                    <p className='text-green-600 text-justify font-light text-lg'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, quisquam! Inventore optio repellat voluptatem, cumque placeat mollitia voluptatibus saepe eum assumenda a temporibus tempore, accusamus sapiente asperiores! Rem doloremque sunt perspiciatis cumque voluptates eligendi, veniam aliquid minima sapiente sint quia provident sit ducimus quod non nihil nulla reprehenderit omnis quibusdam illum quis a inventore nisi. Mollitia reprehenderit ex magni voluptates maxime sed repellendus sapiente, in aut temporibus reiciendis ratione nesciunt, deserunt vel id! Fugit soluta quis nesciunt exercitationem doloribus praesentium.</p>
+                    <p className='text-gray-600 text-justify font-light text-md'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, quisquam! Inventore optio repellat voluptatem, cumque placeat mollitia voluptatibus saepe eum assumenda a temporibus tempore, accusamus sapiente asperiores! Rem doloremque sunt perspiciatis cumque voluptates eligendi, veniam aliquid minima sapiente sint quia provident sit ducimus quod non nihil nulla reprehenderit omnis quibusdam illum quis a inventore nisi. Mollitia reprehenderit ex magni voluptates maxime sed repellendus sapiente, in aut temporibus reiciendis ratione nesciunt, deserunt vel id! Fugit soluta quis nesciunt exercitationem doloribus praesentium.</p>
 
                     <div className='flex flex-row space-x-3'>
                         <input type="checkbox" checked={isChecked} onChange={handleCheckBox}/> 
@@ -56,7 +56,7 @@ const LandingPage = () => {
                         
                     </div>
 
-                    <Link to='./Predict'><button className={`bg-green-600 text-white rounded-md py-3 px-3 w-full ${isChecked ? 'hover:bg-green-600' : 'bg-green-400 cursor-not-allowed'}`}disabled={!isChecked}>Agree & Continue</button></Link>
+                    <Link to='./Predict'><button className={`bg-green-600 text-white rounded-md py-3 px-3 w-full ${isChecked ? 'hover:bg-green-600' : 'bg-green-300 cursor-not-allowed'}`}disabled={!isChecked}>Agree & Continue</button></Link>
 
                 </div>
 

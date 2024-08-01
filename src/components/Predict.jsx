@@ -245,7 +245,7 @@ const Predict = ({ submitImages }) => {
           </div>
         )}
         {!selectedSource && (
-          <div className=" w-full flex flex-row justify-center space-x-8 items-center">
+          <div className=" w-full flex flex-col lg:flex-row justify-center gap-y-8 lg:gap-y-0 lg:gap-x-8 items-center">
             {sources.map((v, i) => {
               const Icon = v.icon;
               return (

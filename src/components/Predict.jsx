@@ -56,7 +56,7 @@ const Predict = ({ submitImages }) => {
       // "image/svg": [".svg"],
       // "image/webp": [".webp"],
     },
-    maxFiles: 3,
+    maxFiles: 1,
     maxSize: 1024 * 1024 * 3,
 
     onDropRejected: (fileRejections) => {
@@ -103,7 +103,7 @@ const Predict = ({ submitImages }) => {
     if (imageFiles && imageFiles.length >= 3) {
       console.log("Maximum images reached.");
       toast.error(
-        "You can only upload a maximum of 3 images at a time. Remove some images and try again."
+        "You can only upload a maximum of 1 image at a time. Remove some images and try again."
       );
       return;
     }
@@ -187,7 +187,7 @@ const Predict = ({ submitImages }) => {
                   >
                     <input {...getInputProps()} />
                     <BsCapslock className="text-green-600 text-2xl" />
-                    <div className="space-y-1 text-green-600 text-center">
+                    <div className="space-y-1 text-green-600 text-center px-4">
                       <p className="text-xl lg:text-2xl">
                         {isDragActive
                           ? "Drop the images here ..."

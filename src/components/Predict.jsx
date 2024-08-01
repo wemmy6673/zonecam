@@ -156,7 +156,7 @@ const Predict = ({ submitImages }) => {
       <div className="h-full center   w-full   ">
         {selectedSource && (
           <div className="w-full flex flex-col justify-start items-center space-y-2">
-            <div className=" flex flex-row justify-center items-center gap-x-4 w-full ">
+            <div className=" flex flex-row justify-center items-center gap-x-2 lg:gap-x-4 w-full ">
               <h2 className="text-green-500 font-bold lg:font-bold   text-3xl  md:text-4xl   self-center text-center lg:text-left ">
                 {selectedSource}
               </h2>
@@ -211,7 +211,7 @@ const Predict = ({ submitImages }) => {
               )}
 
               {selectedSource === sources[0].name && (
-                <div className="w-full space-y-8  max-h-screen ">
+                <div className="w-full space-y-8  ">
                   <div className="flex flex-col justify-start w-[90%] mx-auto min-h-[200px] rounded-xl space-y-4">
                     <Webcam
                       ref={webcamRef}
@@ -229,12 +229,14 @@ const Predict = ({ submitImages }) => {
                     />
                   </div>
 
-                  <div className="w-full flex flex-col justify-center items-center">
-                    <button
-                      onClick={captureImage}
-                      className="w-12 h-12 rounded-full block outline-none  bg-gray-600"
-                    ></button>
-                  </div>
+                  {!(imageFiles && imageFiles.length > 0) && (
+                    <div className="w-full flex flex-col justify-center items-center">
+                      <button
+                        onClick={captureImage}
+                        className="w-12 h-12 rounded-full block outline-none  bg-gray-600"
+                      ></button>
+                    </div>
+                  )}
 
                   {/* Images Preview  */}
 

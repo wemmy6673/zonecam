@@ -75,7 +75,7 @@ export function withProtectedAccess(
     if (isLoading && !authenticated) {
       return (
         <div className="center min-h-screen center">
-          <Loader size={25} type="grid" speedMultiplier={1.5} />;
+          <Loader size={30} speedMultiplier={1.5} />
         </div>
       );
     }

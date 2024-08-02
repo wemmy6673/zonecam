@@ -125,7 +125,6 @@ const Predict = withProtectedAccess(({ user, logOut }) => {
       setImageFiles([
         {
           preview: imageSrc,
-          // file: base64StringToBlob(imageSrc),
           file,
         },
         ...imageFiles,
@@ -134,7 +133,6 @@ const Predict = withProtectedAccess(({ user, logOut }) => {
       setImageFiles([
         {
           preview: imageSrc,
-          // file: base64StringToBlob(imageSrc),
           file,
         },
       ]);

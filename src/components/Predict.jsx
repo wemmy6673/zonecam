@@ -147,7 +147,7 @@ const Predict = withProtectedAccess(({ user, logOut }) => {
       return;
     }
 
-    console.log("Submitting images:", imageFiles);
+    console.log("Submitting images...");
   }
 
   return (

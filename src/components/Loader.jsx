@@ -1,20 +1,37 @@
-// import { ColorRing } from 'react-loader-spinner';
+import {
+  ClipLoader,
+  PulseLoader,
+  CircleLoader,
+  GridLoader,
+} from "react-spinners";
 
-// const Loader = () => (
-//   <div className='flex items-center justify-center h-screen'>
+const spinnersMap = {
+  pulse: PulseLoader,
+  circle: CircleLoader,
+  default: ClipLoader,
+  grid: GridLoader,
+};
 
-//   <ColorRing
-//     visible={true}
-//     height={80}
-//     width={80}
-//     ariaLabel="color-ring-loading"
-//     wrapperStyle={{}}
-//     wrapperClass="color-ring-wrapper"
-//     colors={['#16A34A','#16A34A','#16A34A','#16A34A','#16A34A']}
-//     className=''
-//   />
+export default function Loader({
+  type = "default",
+  size = 20,
+  color = "349B54",
+  inverted = false,
+  speedMultiplier = 1.2,
+  ...rest
+}) {
+  if (inverted) color = "#ffffff";
 
-//   </div>
-// );
+  const RenderProp = spinnersMap[type] || ClipLoader;
 
-// export default Loader;
+  return (
+    <div className="flex py-1 flex-row justify-center items-center">
+      <RenderProp
+        size={size}
+        color={color}
+        speedMultiplier={speedMultiplier}
+        {...rest}
+      />
+    </div>
+  );
+}

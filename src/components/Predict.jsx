@@ -8,6 +8,7 @@ import Header from "./Header";
 import Preview from "./Preview";
 import { CiCamera } from "react-icons/ci";
 import { RiFileUploadLine } from "react-icons/ri";
+import { withProtectedAccess } from "./Auth";
 
 const sources = [
   {
@@ -22,7 +23,7 @@ const sources = [
   },
 ];
 
-const Predict = ({ submitImages }) => {
+const Predict = withProtectedAccess(({ user, logOut }) => {
   const [selectedSource, setSelectedSource] = useState(null);
 
   const [imageFiles, setImageFiles] = useState(null);
@@ -146,12 +147,26 @@ const Predict = ({ submitImages }) => {
       return;
     }
 
-    submitImages(imageFiles);
+    console.log("Submitting images:", imageFiles);
   }
 
   return (
     <div className=" min-h-screen pt-[10vh] ">
       <Header />
+
+      {!selectedSource && (
+        <p className="text-sm text-center text-green-600 pb-4">
+          Hello {user.firstName}, please select a source to predict a
+          zone.&nbsp;&nbsp;
+          <span
+            role="link"
+            className="text-red-600 cursor-pointer hover:underline"
+            onClick={logOut}
+          >
+            [Log out]
+          </span>
+        </p>
+      )}
 
       <div className="h-full center   w-full   ">
         {selectedSource && (
@@ -272,6 +287,6 @@ const Predict = ({ submitImages }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Predict;

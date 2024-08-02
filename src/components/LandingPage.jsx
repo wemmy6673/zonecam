@@ -1,15 +1,33 @@
 import Header from "./Header";
-import { Link } from "wouter";
+import { Link, Redirect } from "wouter";
 import { useState, useEffect } from "react";
 import Splash from "./Splash";
+import { saveState, retrieveState } from "../utils/browser";
+import config from "../config";
 
 const LandingPage = () => {
   const [showSplash, setShowSplash] = useState(true);
+  const [toSignIn, setToSignIn] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowSplash(false);
-    }, 2000);
+    const visitedAlready = retrieveState(
+      "session",
+      config.browserStorageKeys.visitedAlready
+    );
+
+    console.log(visitedAlready);
+
+    if (visitedAlready && visitedAlready.visited) {
+      setToSignIn(true);
+    } else {
+      saveState("session", config.browserStorageKeys.visitedAlready, {
+        visited: true,
+      });
+
+      setTimeout(() => {
+        setShowSplash(false);
+      }, 2000);
+    }
   }, []);
 
   const [isChecked, setIsChecked] = useState(false);
@@ -17,6 +35,10 @@ const LandingPage = () => {
   const handleCheckBox = (e) => {
     setIsChecked(e.target.checked);
   };
+
+  if (toSignIn) {
+    return <Redirect to="/login" />;
+  }
 
   if (showSplash) {
     return <Splash />;

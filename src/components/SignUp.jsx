@@ -2,7 +2,11 @@ import Header from "./Header";
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useMutation } from "react-query";
+import { toast } from "react-toastify";
+import Loader from "./Loader";
+import { createFetcher, endpoints } from "../utils/fetchhelpers";
 
 import { Field, ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -13,6 +17,41 @@ const SignUp = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const [_, navigate] = useLocation();
+
+  const { mutate, isLoading, reset } = useMutation({
+    mutationFn: createFetcher({
+      url: endpoints.register,
+      method: "POST",
+    }),
+
+    mutationKey: [endpoints.signUp, "POST"],
+
+    onSuccess: (data) => {
+      toast.success("Registration successful.");
+
+      const url = `/email/${data.acuid}/${data.rid}`;
+      navigate(url);
+    },
+
+    onError: (error) => {
+      reset();
+      console.log("Error: ", error);
+      toast.error(error.message);
+    },
+  });
+
+  function handleSubmit(values) {
+    if (isLoading) return;
+
+    mutate({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+    });
+  }
 
   return (
     <div className="w-[80%] mx-auto pt-[10vh]">
@@ -42,9 +81,7 @@ const SignUp = () => {
 
             .required("Required"),
         })}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ isValid }) => {
           return (
@@ -104,11 +141,11 @@ const SignUp = () => {
 
               <div className="w-full pt-4">
                 <button
-                  disabled={!isValid}
+                  disabled={!isValid || isLoading}
                   type="submit"
                   className="bg-green-600 text-white my-2 py-4 rounded-xl w-full disabled:opacity-40 disabled:pointer-events-none"
                 >
-                  Register
+                  {isLoading ? <Loader /> : "Register"}
                 </button>
               </div>
 

@@ -7,7 +7,7 @@ const config = {
     authHome: "/predict",
   },
 
-  apiUrl: import.meta.env.VITE_API_URL || "https://zonecam.onrender.com/api",
+  apiUrl: "https://zonecam.onrender.com/api",
 
   endpoints: {
     login: "/u/sign-in",

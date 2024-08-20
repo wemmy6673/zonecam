@@ -54,7 +54,7 @@ const Results = withProtectedAccess(function A({ token }) {
 
   function removePendingResult(uid) {
     return () => {
-      if (!confirm("Delete pending result?")) return;
+      if (!confirm("Delete result?")) return;
 
       const newPredictionIds = predictionIds.filter((v) => v.uid !== uid);
       saveState("local", "ZONECAM_PREDICTS", newPredictionIds);

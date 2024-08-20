@@ -119,7 +119,7 @@ const Results = withProtectedAccess(function A({ token }) {
                     <div
                       title="Delete result"
                       onClick={removePendingResult(v.uid)}
-                      className="p-1 absolute top-2 right-2 cursor-pointer bg-white/10 hover:bg-white/20"
+                      className="p-1 absolute top-2 right-2 cursor-pointer bg-white hover:bg-white/90"
                     >
                       <BsX className=" text-2xl" />
                     </div>

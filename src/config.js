@@ -7,7 +7,7 @@ const config = {
     authHome: "/predict",
   },
 
-  apiUrl: import.meta.env.VITE_API_URL || "http://localhost:7000/api",
+  apiUrl: import.meta.env.VITE_API_URL || "https://zonecam.onrender.com/api",
 
   endpoints: {
     login: "/u/sign-in",
@@ -17,6 +17,8 @@ const config = {
     sessionInfo: "/u/session",
     resetPassword: "/u/password/reset",
     confirmPasswordReset: "/u/password/reset/complete",
+    queuePrediction: "/predict",
+    getPredictionResult: "/results",
   },
 
   browserStorageKeys: {

@@ -29,7 +29,7 @@ const SignUp = () => {
     mutationKey: [endpoints.signUp, "POST"],
 
     onSuccess: (data) => {
-      toast.success("Registration successful.");
+      toast.success("Registration successful, proceed to verify your email. ");
 
       const url = `/email/${data.acuid}/${data.rid}`;
       navigate(url);

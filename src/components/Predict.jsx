@@ -9,6 +9,9 @@ import Preview from "./Preview";
 import { CiCamera } from "react-icons/ci";
 import { RiFileUploadLine } from "react-icons/ri";
 import { withProtectedAccess } from "./Auth";
+import usePrediction from "../utils/hooks/usePrediction";
+import { useLocation } from "wouter";
+import { saveState } from "../utils/browser";
 
 const sources = [
   {
@@ -23,7 +26,7 @@ const sources = [
   },
 ];
 
-const Predict = withProtectedAccess(({ user, logOut }) => {
+const Predict = withProtectedAccess(({ user, logOut, token }) => {
   const [selectedSource, setSelectedSource] = useState(null);
 
   const [imageFiles, setImageFiles] = useState(null);
@@ -139,13 +142,78 @@ const Predict = withProtectedAccess(({ user, logOut }) => {
     }
   }
 
+  // data fetching ---------------
+
+  const [_, setLocation] = useLocation();
+
+  const onError = (error) => {
+    console.log("usePrediction: ", error);
+
+    toast.error("An error occurred. Please try again.");
+  };
+
+  const onSucess = (data) => {
+    const predictionId = {
+      uid: data.uid,
+      imageId: data.imageId,
+      created: Date.now(),
+    };
+
+    saveState("local", "ZONECAM_PREDICTS", [predictionId]);
+
+    toast.success(
+      "Your prediction has been queued successfully. You will be redirected to the results page shortly to view the results."
+    );
+
+    setLocation("/result");
+  };
+
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    predictionRequestResponse,
+    queuePrediction,
+  } = usePrediction(onSucess, onError, token);
+
   function handleSubmit() {
     if (imageFiles.length === 0) {
       toast.error("Please upload at least one image to proceed.");
       return;
     }
 
+    let age = prompt("Enter the age of the person in the image.");
+
+    try {
+      age = parseInt(age);
+    } catch (e) {
+      console.log(e);
+      toast.error("Please enter a valid age.");
+      return;
+    }
+
+    if (!age) {
+      toast.error("Please enter the age of the person in the image.");
+      return;
+    }
+
+    let gender;
+
+    const g = prompt("Is the person in the image a male or female? [Type M/F]");
+
+    if (g) {
+      if (g.toLowerCase() === "m") {
+        gender = "M";
+      } else if (g.toLowerCase() === "f") {
+        gender = "F";
+      } else {
+        toast.error("Please enter a valid gender.");
+        return;
+      }
+    }
+
     console.log("Submitting images...");
+    queuePrediction(imageFiles[0], age, gender, `zonecam-${Date.now()}`);
   }
 
   return (
@@ -176,10 +244,11 @@ const Predict = withProtectedAccess(({ user, logOut }) => {
 
               {imageFiles && imageFiles.length > 0 ? (
                 <button
+                  disabled={isLoading}
                   onClick={handleSubmit}
                   className="ml-4 px-4 py-2 rounded-lg text-white  bg-green-600 hover:bg-green-700 self-center"
                 >
-                  Predict Zone
+                  {isLoading ? "Predicting..." : "Predict Race"}
                 </button>
               ) : (
                 <button

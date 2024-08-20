@@ -35,7 +35,7 @@ const SignIn = withProtectedAccess(
       onSuccess: (data) => {
         saveState("local", config.browserStorageKeys.accessToken, {
           accessToken: data.access_token,
-          tokenType: data.token_type,
+          tokenType: data.bearer,
         });
 
         toast.success("Login successful, welcome!");

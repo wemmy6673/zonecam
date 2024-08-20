@@ -89,11 +89,6 @@ const Results = withProtectedAccess(function A({ token }) {
   return (
     <div className="fixed inset-0 min-h-screen w-full bg-white text-green-500">
       <div className="absolute inset-0 bg-white bg-opacity-10"></div>
-      <img
-        src={Bg1}
-        alt="zonecam"
-        className="object-cover w-full min-h-screen "
-      />
 
       {/* Main Content  */}
       <main className=" min-h-screen  absolute z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] pt-8 pb-24 max-w-[1024px] space-y-8  overflow-y-scroll max-h-full no-scrollbar">
@@ -119,7 +114,7 @@ const Results = withProtectedAccess(function A({ token }) {
                 return (
                   <div
                     key={i}
-                    className="flex relative min-h-[100px] w-full bg-white border border-dashed border-white/20 flex-col  justify-start items-start p-4 lg:p-6 space-y-2"
+                    className="flex relative min-h-[100px] w-full bg-green-500 border border-dashed border-white/20 flex-col  justify-start items-start p-4 lg:p-6 space-y-2"
                   >
                     <div
                       title="Delete result"
@@ -129,7 +124,7 @@ const Results = withProtectedAccess(function A({ token }) {
                       <BsX className=" text-2xl" />
                     </div>
 
-                    <p className="text-green-500 font-semibold text-xl capitalize">
+                    <p className="text-white font-semibold text-xl capitalize">
                       {v.imageId}
                     </p>
 
@@ -142,7 +137,7 @@ const Results = withProtectedAccess(function A({ token }) {
                     )}
 
                     {r.ready && (
-                      <div className="space-y-2 font-normal text-green-500">
+                      <div className="space-y-2 font-normal text-white">
                         <p>
                           This person's race is most likely{" "}
                           <span className="text-[--corn-yellow] font-bold">
@@ -154,7 +149,7 @@ const Results = withProtectedAccess(function A({ token }) {
                     )}
 
                     {!r.ready && (
-                      <p className="text-sm text-green-500/70">
+                      <p className="text-sm text-white/70">
                         Status :{" "}
                         {isFetching
                           ? "Refreshing"
@@ -163,7 +158,7 @@ const Results = withProtectedAccess(function A({ token }) {
                           : "Pending"}
                       </p>
                     )}
-                    <p className="text-sm text-green-500/70">
+                    <p className="text-sm text-white">
                       Requested{" "}
                       {moment(new Date(+v.created), "YYYYMMDD").fromNow()}
                     </p>

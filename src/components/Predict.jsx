@@ -11,7 +11,7 @@ import { RiFileUploadLine } from "react-icons/ri";
 import { withProtectedAccess } from "./Auth";
 import usePrediction from "../utils/hooks/usePrediction";
 import { useLocation } from "wouter";
-import { saveState } from "../utils/browser";
+import { retrieveState, saveState } from "../utils/browser";
 
 const sources = [
   {
@@ -159,7 +159,9 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
       created: Date.now(),
     };
 
-    saveState("local", "ZONECAM_PREDICTS", [predictionId]);
+    let temp = retrieveState("local", "ZONECAM_PREDICTS") || [];
+
+    saveState("local", "ZONECAM_PREDICTS", [...temp, predictionId]);
 
     toast.success(
       "Your prediction has been queued successfully. You will be redirected to the results page shortly to view the results."

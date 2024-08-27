@@ -296,7 +296,7 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
 
               {selectedSource === sources[0].name && (
                 <div className="w-full space-y-8  ">
-                  <div className="flex flex-col justify-start w-[90%] mx-auto min-h-[200px] rounded-xl space-y-4">
+                  <div className="flex flex-col justify-start w-[90%] mx-auto min-h-[200px] rounded-xl space-y-4 relative">
                     <Webcam
                       ref={webcamRef}
                       audio={false}
@@ -311,6 +311,10 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
                         //   facingMode: { exact: "environment" },
                       }}
                     />
+
+                    <div className="w-[65%] h-[65%] border-2 border-white rounded-lg absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div>
+
+                    <div className="w-[65%] h-[30%] border-x-2 border-inherit z-20  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div>
                   </div>
 
                   {!(imageFiles && imageFiles.length > 0) && (

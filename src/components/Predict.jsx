@@ -12,6 +12,7 @@ import { withProtectedAccess } from "./Auth";
 import usePrediction from "../utils/hooks/usePrediction";
 import { useLocation } from "wouter";
 import { retrieveState, saveState } from "../utils/browser";
+import Cropper from "react-easy-crop";
 
 const sources = [
   {
@@ -28,6 +29,10 @@ const sources = [
 
 const Predict = withProtectedAccess(({ user, logOut, token }) => {
   const [selectedSource, setSelectedSource] = useState(null);
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [showCrop, setShowCrop] = useState(false);
 
   const [imageFiles, setImageFiles] = useState(null);
 
@@ -47,6 +52,8 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
     }));
 
     setImageFiles(tempFiles);
+
+    setShowCrop(true);
 
     // console.log(imageFiles);
   }, []);
@@ -140,6 +147,8 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
         },
       ]);
     }
+
+    setShowCrop(true);
   }
 
   // data fetching ---------------
@@ -236,6 +245,33 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
         </p>
       )}
 
+      {/* crop tool  */}
+
+      {imageFiles?.length > 0 && showCrop && (
+        <div className="z-30 fixed w-full min-h-screen inset-0 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Cropper
+            image={imageFiles[0].preview}
+            crop={crop}
+            zoom={zoom}
+            cropShape="round"
+            showGrid={false}
+            aspect={1}
+            onCropChange={setCrop}
+            onCropComplete={() => {
+              console.log("We done!");
+            }}
+            onZoomChange={setZoom}
+          />
+
+          <button
+            onClick={() => setShowCrop(false)}
+            className="absolute bottom-[10%] z-50 left-1/2 -translate-x-1/2 bg-green-500 text-white rounded-lg px-6 py-3 text-sm font-medium"
+          >
+            Apply
+          </button>
+        </div>
+      )}
+
       <div className="h-full center   w-full   ">
         {selectedSource && (
           <div className="w-full flex flex-col justify-start items-center space-y-2">
@@ -248,9 +284,9 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
                 <button
                   disabled={isLoading}
                   onClick={handleSubmit}
-                  className="ml-4 px-4 py-2 rounded-lg text-white  bg-green-600 hover:bg-green-700 self-center"
+                  className="ml-4 px-4 py-2 rounded-lg text-white  bg-green-600 hover:bg-green-700 self-center disabled:pointer-events-none disabled:opacity-20"
                 >
-                  {isLoading ? "Predicting..." : "Predict Race"}
+                  {isLoading ? "Predicting..." : "Predict Zone"}
                 </button>
               ) : (
                 <button
@@ -314,7 +350,9 @@ const Predict = withProtectedAccess(({ user, logOut, token }) => {
 
                     <div className="w-[65%] h-[65%] border-2 border-white rounded-lg absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div>
 
-                    <div className="w-[65%] h-[30%] border-x-2 border-inherit z-20  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div>
+                    {/* <div className="w-[65%] h-[30%] border-x-2 border-green-500 z-20  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div>
+
+                    <div className="w-[30%] h-[65%] border-y-2 border-green-500 z-20   absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"></div> */}
                   </div>
 
                   {!(imageFiles && imageFiles.length > 0) && (

@@ -139,8 +139,8 @@ const Results = withProtectedAccess(function A({ token }) {
                     {r.ready && (
                       <div className="space-y-2 font-normal text-white">
                         <p>
-                          This person's race is most likely{" "}
-                          <span className="text-[--corn-yellow] font-bold">
+                          This person's geopolitical zone is most likely{" "}
+                          <span className="text-yellow-600 font-bold">
                             {" "}
                             {r.data.labelClass}.{"  "}
                           </span>
